@@ -1,6 +1,8 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -10,6 +12,8 @@ import android.widget.Toast;
 
 import com.example.jokesdisplayerlibrary.JokesDisplayer;
 import com.example.jokesproviderlibrary.JokesProvider;
+
+import java.util.concurrent.ExecutionException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -44,13 +48,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
+        /*
         JokesProvider jokesProvider = new JokesProvider();
         String random = jokesProvider.getRandomJoke();
-        /*
+
         Toast.makeText(this, random, Toast.LENGTH_SHORT).show();
-        */
+
         Intent startJokeActivity = new Intent(getApplicationContext(), JokesDisplayer.class);
         startJokeActivity.putExtra(JokesDisplayer.INTENT_STRING, random);
+        startActivity(startJokeActivity);*/
+
+        String randomJoke = "";
+        AsyncTask<Context, Void, String> async = new EndpointsAsyncTask().execute(getApplicationContext());
+        try {
+            randomJoke = async.get();
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        } catch (ExecutionException e){
+            e.printStackTrace();
+        }
+
+        Context context = getApplicationContext();
+        Class destinationClass = JokesDisplayer.class;
+
+        Intent startJokeActivity = new Intent(context, destinationClass);
+        startJokeActivity.putExtra(JokesDisplayer.INTENT_STRING, randomJoke);
+
         startActivity(startJokeActivity);
     }
 
