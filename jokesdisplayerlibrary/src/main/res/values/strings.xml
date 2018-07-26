@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">jokesdisplayerlibrary</string>
+    <string name="default_joke">This is a default joke!</string>
+</resources>

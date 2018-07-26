@@ -50,4 +50,5 @@ dependencies {
 
     // import the library just created
     compile project(':jokesproviderlibrary')
+    compile project(':jokesdisplayerlibrary')
 }
