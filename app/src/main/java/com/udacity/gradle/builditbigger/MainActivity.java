@@ -46,23 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        String randomJoke = "";
-        AsyncTask<Context, Void, String> async = new EndpointsAsyncTask().execute(getApplicationContext());
-        try {
-            randomJoke = async.get();
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        } catch (ExecutionException e){
-            e.printStackTrace();
-        }
-
-        Context context = getApplicationContext();
-        Class destinationClass = JokesDisplayer.class;
-
-        Intent startJokeActivity = new Intent(context, destinationClass);
-        startJokeActivity.putExtra(JokesDisplayer.INTENT_STRING, randomJoke);
-
-        startActivity(startJokeActivity);
+       new EndpointsAsyncTask().execute(getApplicationContext());
     }
 
 

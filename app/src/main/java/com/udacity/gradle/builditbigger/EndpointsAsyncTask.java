@@ -3,8 +3,10 @@ package com.udacity.gradle.builditbigger;
 // https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/77e9910911d5412e5efede5fa681ec105a0f02ad/HelloEndpoints
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 
+import com.example.jokesdisplayerlibrary.JokesDisplayer;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -44,5 +46,15 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
         } catch (IOException e) {
             return e.getMessage();
         }
+    }
+
+    @Override
+    protected void onPostExecute(String randomJoke) {
+        Class destinationClass = JokesDisplayer.class;
+
+        Intent startJokeActivity = new Intent(context, destinationClass);
+        startJokeActivity.putExtra(JokesDisplayer.INTENT_STRING, randomJoke);
+
+        context.startActivity(startJokeActivity);
     }
 }
