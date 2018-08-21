@@ -1,5 +1,7 @@
 # Build It Bigger : Gradle for Android and Java project
 
+Fourth project of Udacity's Android Nanodegree.
+
 This project is an app with multiple flavors that uses
 multiple libraries and Google Cloud Endpoints. The finished app consists
 of four modules :
